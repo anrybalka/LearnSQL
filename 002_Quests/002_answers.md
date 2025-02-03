@@ -110,29 +110,47 @@ HAVING SUM(p.price * o.amount) > 100000
 ### 5. **Операции с датами**
    - Вывести пользователей, которые зарегистрировались в последний месяц.
 ```sql
-
+SELECT * FROM users u 
+WHERE EXTRACT(MONTH FROM u.created_at)=12
 ```
    - Найти самый старый заказ в таблице `Orders`.
 ```sql
-
+SELECT * FROM orders o 
+ORDER BY o.created_at ASC
+LIMIT 1
 ```
    - Определить, сколько заказов было сделано в 2023 году.
 ```sql
-
+SELECT COUNT(*) AS "Количество заказов 2023" FROM orders o 
+WHERE EXTRACT(YEAR FROM o.created_at) = 2023
 ```
 
 ### 6. **Работа с GROUP BY и HAVING**
    - Определить, какие пользователи сделали более одного заказа.
 ```sql
-
+SELECT u.id, u."name", count(o.id) FROM orders o 
+JOIN users u ON u.id = o.user_id
+GROUP BY u.id
+HAVING count(o.id)>1
 ```
    - Найти пользователей, которые потратили на заказы в сумме более 50000.
 ```sql
-
+SELECT u."name", SUM(p.price * o.amount) AS total_spent  FROM orderitems o 
+JOIN orders o2 ON o2.id = o.order_id 
+JOIN users u ON u.id = o2.user_id 
+JOIN products p ON o.product_id =p.id
+GROUP BY u."name"
+HAVING SUM(p.price * o.amount) > 50000
 ```
    - Определить, какие товары заказывали больше 5 раз.
 ```sql
-
+SELECT p.id, p.price, 
+COALESCE(sum(o.amount),0) AS "Шт. заказано", 
+COALESCE(sum(p.price*o.amount),0) AS "Заказано на сумму" 
+FROM products p 
+LEFT JOIN orderitems o ON o.product_id = p.id 
+GROUP BY p.id 
+HAVING COALESCE(sum(o.amount),0) > 5
 ```
 
 ### 7. **Работа с UPDATE и DELETE**
