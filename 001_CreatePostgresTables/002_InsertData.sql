@@ -23,7 +23,8 @@ INSERT INTO Users (id, name, email, birthdate, created_at) VALUES
 (22, 'Вадим Гусев', 'vadim.gusev@email.com', '1985-08-08', '2021-06-24 10:45:05'),
 (23, 'Светлана Тимофеева', 'svetlana.timofeeva@email.com', '1992-09-28', '2019-11-02 19:37:58'),
 (24, 'Никита Филатов', 'nikita.filatov@email.com', '1988-04-07', '2020-09-15 08:21:44'),
-(25, 'Ирина Королёва', 'irina.koroleva@email.com', '1993-01-30', '2023-12-08 06:10:32');
+(25, 'Ирина Королёва', 'irina.koroleva@email.com', '1993-01-30', '2023-12-08 06:10:32'),
+(26, 'Андрей Рыбалка',	'andrey.rybalka@email.com', '1998-11-09', '2025-02-03 16:57');
 
 
 INSERT INTO Products (id, name, price, stock) VALUES
@@ -36,7 +37,8 @@ INSERT INTO Products (id, name, price, stock) VALUES
 (7, 'Телевизор 4K UltraHD', 89999, 5),
 (8, 'Робот-пылесос CleanBot', 29999, 18),
 (9, 'Фотоаппарат ZoomX 300', 54999, 7),
-(10, 'Электросамокат Swift', 69999, 9);
+(10, 'Электросамокат Swift', 69999, 9),
+(11, 'Яндекс Станция Лайт',4940, 15);
 
 INSERT INTO Orders (user_id, created_at) VALUES
 (3, '2024-01-10 10:15:30'), (7, '2023-11-05 12:34:50'), (12, '2022-12-22 14:20:10'), 
