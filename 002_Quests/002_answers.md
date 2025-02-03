@@ -98,6 +98,12 @@ WHERE o.amount IS NULL
 ```
    - Вывести пользователей, у которых сумма всех заказов превышает 100000.
 ```sql
+SELECT u."name", SUM(p.price * o.amount) AS total_spent  FROM orderitems o 
+JOIN orders o2 ON o2.id = o.order_id 
+JOIN users u ON u.id = o2.user_id 
+JOIN products p ON o.product_id =p.id
+GROUP BY u."name"
+HAVING SUM(p.price * o.amount) > 100000
 
 ```
 
