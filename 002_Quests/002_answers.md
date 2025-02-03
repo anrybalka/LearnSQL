@@ -156,13 +156,26 @@ HAVING COALESCE(sum(o.amount),0) > 5
 ### 7. **Работа с UPDATE и DELETE**
    - Уменьшить цену всех товаров дороже 100000 на 10%.
 ```sql
-
+UPDATE products
+SET price = price-((price/100)*10)
+WHERE price >100000
 ```
    - Удалить всех пользователей, которые не сделали ни одного заказа.
 ```sql
-
+DELETE FROM users
+WHERE id IN(
+SELECT u.id FROM users u
+LEFT JOIN orders o ON o.user_id = u.id
+WHERE o.id IS NULL
+)
 ```
    - Обновить email всех пользователей, добавив к ним префикс "test_".
 ```sql
-
+UPDATE users 
+SET email = CONCAT('test_',email)
+```
+   - Обновить email всех пользователей, убрав у них префикс "test_".
+```sql
+UPDATE users
+SET email = SUBSTRING(email, 6);
 ```
