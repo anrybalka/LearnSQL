@@ -20,26 +20,57 @@ WHERE extract(month from u.birthdate) = 1
 ### 2. **Агрегатные функции**
    - Посчитать, сколько заказов сделал каждый пользователь.
 ```sql
-select u."name", o.user_id, COUNT(*) AS total_orders
-from orders o
-join users u on o.user_id = u.id
-group by o.user_id , u."name"
-order by o.user_id
+SELECT
+	u."name",
+	o.user_id,
+	COUNT(*) AS total_orders
+FROM
+	orders o
+JOIN users u ON
+	o.user_id = u.id
+GROUP BY
+	o.user_id ,
+	u."name"
+ORDER BY
+	o.user_id
 ```
    - Найти среднюю цену товаров в таблице `Products`.
 ```sql
-select avg(p.price) as avgPrice
-from products p
+SELECT
+	avg(p.price) AS avgPrice
+FROM
+	products p
 ```
    - Определить, какой товар заказывали чаще всего.
 ```sql
-
+SELECT
+	p."name",
+	o.product_id,
+	count(amount) AS "Количество заказов"
+FROM
+	orderitems o
+JOIN products p ON
+	p.id = o.product_id
+GROUP BY
+	o.product_id,
+	p."name"
+ORDER BY
+	"Количество заказов" DESC
 ```
 
 ### 3. **Объединение таблиц (JOIN)**
    - Вывести список всех заказов с именами пользователей, которые их сделали.
 ```sql
-
+SELECT
+	u."name",
+	o.created_at,
+	o.id AS "ID Заказа"
+FROM
+	orders o
+JOIN users u ON
+	u.id = o.user_id
+ORDER BY
+	o.created_at
 ```
    - Получить список товаров, которые были заказаны хотя бы раз, с указанием их цены и количества заказов.
 ```sql
