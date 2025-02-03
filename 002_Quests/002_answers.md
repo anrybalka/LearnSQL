@@ -92,7 +92,9 @@ WHERE p.price >80000
 ```
    - Определить, какие товары не были заказаны ни разу.
 ```sql
-
+SELECT * FROM products p
+LEFT JOIN orderitems o ON o.product_id = p.id
+WHERE o.amount IS NULL
 ```
    - Вывести пользователей, у которых сумма всех заказов превышает 100000.
 ```sql
