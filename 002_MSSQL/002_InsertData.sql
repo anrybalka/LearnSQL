@@ -1,4 +1,4 @@
-INSERT INTO Users (name, email, birthdate, created_at) VALUES
+INSERT INTO Users (full_name, email, birthdate, created_at) VALUES
 (N'Иван Петров', 'ivan.petrov@email.com', '1990-05-12', '2023-08-15 14:23:45'),
 (N'Мария Иванова', 'maria.ivanova@email.com', '1987-11-30', '2022-12-01 09:15:32'),
 (N'Алексей Смирнов', 'alex.smirnov@email.com', '1995-06-21', '2024-01-05 16:40:10'),
@@ -27,7 +27,7 @@ INSERT INTO Users (name, email, birthdate, created_at) VALUES
 (N'Андрей Рыбалка',	'andrey.rybalka@email.com', '1998-11-09', '2025-02-03 16:57');
 
 
-INSERT INTO Products (name, price, stock) VALUES
+INSERT INTO Products (title, price, stock) VALUES
 (N'Смартфон XPhone 12', 79999, 15),
 (N'Ноутбук UltraBook Pro', 119999, 8),
 (N'Беспроводные наушники', 14999, 25),

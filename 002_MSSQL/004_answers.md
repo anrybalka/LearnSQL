@@ -18,12 +18,12 @@ WHERE MONTH(u.birthdate) = 1;
 ### 2. **Агрегатные функции**
    - Посчитать, сколько заказов сделал каждый пользователь.
 ```sql
-SELECT u."name", o.user_id, COUNT(*) AS total_Orders
+SELECT u.full_name, o.user_id, COUNT(*) AS total_Orders
 FROM Orders o
 JOIN Users u ON
 	o.user_id = u.id
 GROUP BY
-	o.user_id , u."name"
+	o.user_id , u.full_name
 ORDER BY
 	o.user_id
 ```
@@ -34,12 +34,12 @@ FROM Products p
 ```
    - Определить, какой товар заказывали чаще всего.
 ```sql
-SELECT p."name", o.product_id, count(amount) AS "Количество заказов"
+SELECT p.title, o.product_id, count(amount) AS "Количество заказов"
 FROM Orderitems o
 JOIN Products p ON
 	p.id = o.product_id
 GROUP BY
-	o.product_id, p."name"
+	o.product_id, p.title
 ORDER BY
 	"Количество заказов" DESC
 ```
@@ -47,7 +47,7 @@ ORDER BY
 ### 3. **Объединение таблиц (JOIN)**
    - Вывести список всех заказов с именами пользователей, которые их сделали.
 ```sql
-SELECT u."name", o.created_at, o.id AS "ID Заказа"
+SELECT u.full_name, o.created_at, o.id AS "ID Заказа"
 FROM Orders o
 JOIN Users u ON
 	u.id = o.user_id
@@ -56,23 +56,23 @@ ORDER BY
 ```
    - Получить список товаров, которые были заказаны хотя бы раз, с указанием их цены и количества заказов.
 ```sql
-SELECT p."name", p.price, count(o.amount) AS "Количество заказов"
+SELECT p.title, p.price, count(o.amount) AS "Количество заказов"
 FROM Products p
 JOIN Orderitems o ON
 	o.product_id = p.id
 GROUP BY
-	p."name", p.price
+	p.title, p.price
 HAVING
 	count(o.amount) >= 1
 ```
    - Найти пользователей, которые не сделали ни одного заказа.
 ```sql
-SELECT u."name", COUNT(o.id) AS "Количество заказов"
+SELECT u.full_name, COUNT(o.id) AS "Количество заказов"
 FROM Users u
 LEFT JOIN Orders o ON
 	o.user_id = u.id
 GROUP BY
-	u."name"
+	u.full_name
 HAVING
 	COUNT(o.id) = 0
 ```
@@ -80,7 +80,7 @@ HAVING
 ### 4. **Подзапросы**
    - Найти пользователей, которые заказали хотя бы один товар дороже 80000.
 ```sql
-SELECT u."name", p.price
+SELECT u.full_name, p.price
 FROM Orderitems o
 JOIN Products p ON
 	p.id = o.product_id
@@ -98,11 +98,11 @@ WHERE o.amount IS NULL
 ```
    - Вывести пользователей, у которых сумма всех заказов превышает 100000.
 ```sql
-SELECT u."name", SUM(p.price * o.amount) AS total_spent  FROM Orderitems o 
+SELECT u.full_name, SUM(p.price * o.amount) AS total_spent  FROM Orderitems o 
 JOIN Orders o2 ON o2.id = o.order_id 
 JOIN Users u ON u.id = o2.user_id 
 JOIN Products p ON o.product_id =p.id
-GROUP BY u."name"
+GROUP BY u.full_name
 HAVING SUM(p.price * o.amount) > 100000
 
 ```
@@ -128,18 +128,18 @@ WHERE YEAR(o.created_at) = 2023;
 ### 6. **Работа с GROUP BY и HAVING**
    - Определить, какие пользователи сделали более одного заказа.
 ```sql
-SELECT u.id, u."name", count(o.id) FROM Orders o 
+SELECT u.id, u.full_name, count(o.id) FROM Orders o 
 JOIN Users u ON u.id = o.user_id
 GROUP BY u.id
 HAVING count(o.id)>1
 ```
    - Найти пользователей, которые потратили на заказы в сумме более 50000.
 ```sql
-SELECT u."name", SUM(p.price * o.amount) AS total_spent  FROM Orderitems o 
+SELECT u.full_name, SUM(p.price * o.amount) AS total_spent  FROM Orderitems o 
 JOIN Orders o2 ON o2.id = o.order_id 
 JOIN Users u ON u.id = o2.user_id 
 JOIN Products p ON o.product_id =p.id
-GROUP BY u."name"
+GROUP BY u.full_name
 HAVING SUM(p.price * o.amount) > 50000
 ```
    - Определить, какие товары заказывали больше 5 раз.
