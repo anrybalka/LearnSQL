@@ -24,10 +24,10 @@ INSERT INTO Users (full_name, email, birthdate, created_at) VALUES
 (N'Светлана Тимофеева', 'svetlana.timofeeva@email.com', '1992-09-28', '2019-11-02 19:37:58'),
 (N'Никита Филатов', 'nikita.filatov@email.com', '1988-04-07', '2020-09-15 08:21:44'),
 (N'Ирина Королёва', 'irina.koroleva@email.com', '1993-01-30', '2023-12-08 06:10:32'),
-(N'Андрей Рыбалка',	'andrey.rybalka@email.com', '1998-11-09', '2025-02-03 16:57');
+(N'Андрей Рыбалка', 'andrey.rybalka@email.com', '1998-11-09', '2025-02-03 16:57:00');
 
 
-INSERT INTO Products (title, price, stock) VALUES
+INSERT INTO dbo.Products (title, price, stock) VALUES
 (N'Смартфон XPhone 12', 79999, 15),
 (N'Ноутбук UltraBook Pro', 119999, 8),
 (N'Беспроводные наушники', 14999, 25),
@@ -40,7 +40,7 @@ INSERT INTO Products (title, price, stock) VALUES
 (N'Электросамокат Swift', 69999, 9),
 (N'Яндекс Станция Лайт',4940, 15);
 
-INSERT INTO Orders (user_id, created_at) VALUES
+INSERT INTO dbo.Orders (user_id, created_at) VALUES
 (3, '2024-01-10 10:15:30'), (7, '2023-11-05 12:34:50'), (12, '2022-12-22 14:20:10'), 
 (5, '2023-09-19 08:45:25'), (8, '2021-06-15 17:30:40'), (15, '2024-02-01 19:05:55'), 
 (21, '2023-07-22 11:10:10'), (9, '2020-08-13 13:20:30'), (2, '2022-05-27 15:45:05'), 
@@ -59,7 +59,7 @@ INSERT INTO Orders (user_id, created_at) VALUES
 (20, '2024-02-01 22:50:50'), (17, '2023-05-12 13:30:10'), (13, '2021-12-01 07:20:30'), 
 (22, '2020-12-14 15:40:55'), (24, '2022-08-22 18:55:20');
 
-INSERT INTO OrderItems (order_id, product_id, amount) VALUES
+INSERT INTO dbo.OrderItems (order_id, product_id, amount) VALUES
 (1, 4, 1), (1, 2, 1), (2, 6, 2), (2, 8, 1), (3, 3, 1),
 (3, 7, 1), (4, 5, 2), (5, 9, 1), (6, 1, 1), (6, 4, 1),
 (7, 2, 1), (8, 10, 1), (9, 5, 1), (10, 8, 2), (11, 3, 1),

@@ -1,6 +1,6 @@
 CREATE TABLE Users (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    name NVARCHAR(255) NOT NULL,
+    full_name NVARCHAR(255) NOT NULL,
     email NVARCHAR(255) UNIQUE NOT NULL,
     birthdate DATE NOT NULL,
     created_at DATETIME DEFAULT GETDATE() NOT NULL
@@ -8,7 +8,7 @@ CREATE TABLE Users (
 
 CREATE TABLE Products (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    full_name NVARCHAR(255) NOT NULL,
+    title NVARCHAR(255) NOT NULL,
     price INT NOT NULL CHECK (price >= 0),
     stock INT NOT NULL CHECK (stock >= 0)
 );
